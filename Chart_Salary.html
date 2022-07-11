@@ -10,32 +10,32 @@ var chart = new CanvasJS.Chart("chartContainer", {
 	animationEnabled: true,
 	theme: "light2",
 	title: {
-		text: "Daily Sales Data"
+		text: "Employee Salary Distribution"
 	},
 	axisY: {
-		title: "Units",
+		title: "Dollars",
 		titleFontSize: 24,
 		includeZero: true
 	},
 	data: [{
 		type: "column",
-		yValueFormatString: "#,### Units",
+		yValueFormatString: "#,### Salary",
 		dataPoints: dataPoints
 	}]
 });
 
 function addData(data) {
-	for (var i = 0; i < data.length; i++) {
+	for (var i = 0; i < data.data.length; i++) {
 		dataPoints.push({
-			x: new Date(data[i].date),
-			y: data[i].units
+			x: data.data[i][10],
+			y: data.data[i][11]
 		});
 	}
 	chart.render();
 
 }
 
-$.getJSON("https://canvasjs.com/data/gallery/javascript/daily-sales-data.json", addData);
+$.getJSON("https://pollysnips.s3.amazonaws.com/bostonEmployeeSalaries.json", addData);
 
 }
 </script>
